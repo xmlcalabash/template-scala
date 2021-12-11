@@ -1,11 +1,11 @@
 package com.xmlcalabash.ext.templatescala
 
 import com.xmlcalabash.model.util.{SaxonTreeBuilder, XProcConstants}
-import com.xmlcalabash.runtime.{BinaryNode, StaticContext, XProcMetadata, XmlPortSpecification}
+import com.xmlcalabash.runtime.{BinaryNode, XProcMetadata, XmlPortSpecification}
 import com.xmlcalabash.steps.DefaultXmlStep
-import com.xmlcalabash.util.{MediaType, TypeUtils}
+import com.xmlcalabash.util.{MediaType, MinimalStaticContext, TypeUtils}
 import net.sf.saxon.om.{AttributeMap, EmptyAttributeMap}
-import net.sf.saxon.s9api.{QName, XdmArray, XdmAtomicValue, XdmMap, XdmNode}
+import net.sf.saxon.s9api._
 
 class Template extends DefaultXmlStep {
   override def inputSpec: XmlPortSpecification = XmlPortSpecification.ANYSOURCESEQ
@@ -40,7 +40,7 @@ class Template extends DefaultXmlStep {
     }
   }
 
-  override def run(context: StaticContext): Unit = {
+  override def run(context: MinimalStaticContext): Unit = {
     super.run(context)
 
     val builder = new SaxonTreeBuilder(config)
